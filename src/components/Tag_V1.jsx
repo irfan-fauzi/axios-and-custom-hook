@@ -6,7 +6,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 const Tag_V1 = () => {
 
-  const [tag, setTag] = useState('');
+  const [tag, setTag] = useState('dog');
   const [gif, setGif] = useState('');
 
   const fetchGif = async (tag) => {
@@ -18,22 +18,18 @@ const Tag_V1 = () => {
   }
   useEffect(() => {
     fetchGif(tag)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  const handleChange = (e) => {
-    let val = e.target.value;
-    setTag(val);
-    fetchGif(val)
+  const handleClick = () => {
+   fetchGif(tag)
   }
-  // const handleClick = () => {
-  //  setTag()
-  // }
   return (
     <div className="container">
-     <h1>Random</h1>
-     <img src={gif} alt="gif" width="200"/>
-     <input type="text" onChange={handleChange} />
-     
+     <h1>Random {tag}</h1>
+     <img src={gif} alt="gif" width="200" />
+     <input type="text" onChange={(e) => setTag(e.target.value)} value={tag}/>
+     <button onClick={handleClick}>click</button>
     </div>
   )
 }
